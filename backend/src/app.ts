@@ -1,6 +1,9 @@
-import express,{ Application } from 'express'
+import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import konek from './konek'
+
+konek()
 
 const PORT : string|number = process.env.PORT || 5000
 
