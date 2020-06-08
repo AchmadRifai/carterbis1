@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "ts-node ./src/app.ts"
     },
     "author": "Ashura",
     "license": "ISC",
@@ -14,9 +15,13 @@
         "mongoose": "^5.9.18"
     },
     "devDependencies": {
+        "@types/body-parser": "^1.19.0",
         "@types/cors": "^2.8.6",
         "@types/express": "^4.17.6",
+        "@types/mongoose": "^5.7.22",
         "@types/node": "^14.0.11",
+        "nodemon": "^2.0.4",
+        "ts-node": "^8.10.2",
         "typescript": "^3.9.5"
     }
 }

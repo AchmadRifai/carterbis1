@@ -1,19 +1,14 @@
-import express,{ Application } from "express"
+import express,{ Application } from 'express'
 import cors from 'cors'
+import bodyParser from 'body-parser'
 
-class App{
+const PORT : string|number = process.env.PORT || 5000
 
-    public app:Application
+const app=express()
 
-    constructor(){
-        this.app=express()
-        this.settingan()
-    }
+app
+    .use(cors())
+    .use(bodyParser.json({ limit: '50mb' }))
+    .use(bodyParser.urlencoded({ limit: '50mb', extended:true}));
 
-    private settingan(){
-        this.app.use(cors())
-    }
-
-}
-
-export default new App().app
+app.listen(PORT,()=>console.log('listening on ${PORT}'))
