@@ -47,11 +47,27 @@ let storage_emp = new GridFsStorage({
         })
     }
 })
+let storage_galery = new GridFsStorage({
+    url: host,
+    options: { useNewUrlParser: true, useUnifiedTopology: true },
+    file: (req, file) => {
+        return new Promise((resolv, reject) => {
+            crypto.randomBytes(16, (e, buf) => {
+                if (e) reject(e)
+                let filename = buf.toString("hex") + path.extname(file.originalname)
+                let fileInfo = { filename: filename, bucketName: 'galery_img' }
+                resolv(fileInfo)
+            })
+        })
+    }
+})
 
 let uploadFileMobil = multer({ storage: storage_mobil }).single("file")
 let uploadFileMitra = multer({ storage: storage_mitra }).single('file')
 let uploadFileEmp = multer({ storage: storage_emp }).single('file')
+let uploadFileGalery = multer({storage:storage_galery}).single('file')
 let mobile = util.promisify(uploadFileMobil)
 let mitrane = util.promisify(uploadFileMitra)
 let employne = util.promisify(uploadFileEmp)
-module.exports = { mobile, mitrane, employne }
+let galerine = util.promisify(uploadFileGalery)
+module.exports = { mobile, mitrane, employne, galerine }
