@@ -1,6 +1,7 @@
 let util = require("util")
 let multer = require("multer")
 let crypto = require('crypto')
+let _=require('lodash')
 let GridFsStorage = require("multer-gridfs-storage")
 
 let host = 'mongodb+srv://ashura:paradewa@cluster0-1nxfr.mongodb.net/carter?retryWrites=true&w=majority'
@@ -8,7 +9,7 @@ let host = 'mongodb+srv://ashura:paradewa@cluster0-1nxfr.mongodb.net/carter?retr
 let storage_mobil = new GridFsStorage({
     url: host,
     options: { useNewUrlParser: true, useUnifiedTopology: true },
-    file: (req, file) => {
+    file: (_, file) => {
         return new Promise((resolv, reject) => {
             crypto.randomBytes(16, (e, buf) => {
                 if (e) reject(e)
@@ -22,7 +23,7 @@ let storage_mobil = new GridFsStorage({
 let storage_mitra = new GridFsStorage({
     url: host,
     options: { useNewUrlParser: true, useUnifiedTopology: true },
-    file: (req, file) => {
+    file: (_, file) => {
         return new Promise((resolv, reject) => {
             crypto.randomBytes(16, (e, buf) => {
                 if (e) reject(e)
@@ -36,7 +37,7 @@ let storage_mitra = new GridFsStorage({
 let storage_emp = new GridFsStorage({
     url: host,
     options: { useNewUrlParser: true, useUnifiedTopology: true },
-    file: (req, file) => {
+    file: (_, file) => {
         return new Promise((resolv, reject) => {
             crypto.randomBytes(16, (e, buf) => {
                 if (e) reject(e)
@@ -50,7 +51,7 @@ let storage_emp = new GridFsStorage({
 let storage_galery = new GridFsStorage({
     url: host,
     options: { useNewUrlParser: true, useUnifiedTopology: true },
-    file: (req, file) => {
+    file: (_, file) => {
         return new Promise((resolv, reject) => {
             crypto.randomBytes(16, (e, buf) => {
                 if (e) reject(e)

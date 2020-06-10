@@ -24,7 +24,10 @@ let Mobil=new schema({
 	merk:String,
 	tahun:Number,
 	harga:Number,
-	gbr:String
+	depan:String,
+	belakang:String,
+	kiri:String,
+	kanan:String
 })
 let Employer=new schema({
 	nama:String,
