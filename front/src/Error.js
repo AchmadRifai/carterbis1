@@ -16,10 +16,7 @@ let useStyle=makeStyles((theme)=>({
 
 export default class Error extends React.Component{
 
-	constructor(props){
-		super(props)
-		this.state={tayang:true, dash:localStorage.getItem('sesi')}
-	}
+	state={tayang:true, dash:localStorage.getItem('sesi')}
 
 	ditutup=()=>{
 		this.setState({tayang:false})
