@@ -1,17 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import 'fontsource-roboto'
 import './index.css'
 import App from './App'
 import Error from './Error'
 import * as serviceWorker from './serviceWorker'
+import {BrowserRouter, Switch, Route} from 'react-router-dom/cjs/react-router-dom.min'
 
 ReactDOM.render(
 	<BrowserRouter>
 		<Switch>
-			<Route path="/"><App/></Route>
-			<Route path="*"><Error/></Route>
+			<Route path="/" component={App} exact/>
+			<Route component={Error}/>
 		</Switch>
   	</BrowserRouter>,
   	document.getElementById('root')

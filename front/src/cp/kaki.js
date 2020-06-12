@@ -15,6 +15,13 @@ let useStyle=makeStyles((theme)=>({
       		paddingBottom: theme.spacing(6),
     	},
   	},
+	'@global': {
+    	ul: {
+      		margin: 0,
+      		padding: 0,
+      		listStyle: 'none',
+    	},
+  	},
 }))
 
 export default function Kaki(props){
@@ -28,7 +35,8 @@ export default function Kaki(props){
 					<ul>
 					{iki.desk.map((siji)=>{
 						return <li>
-							<Link component={RouterLink} to={siji.menuju}>
+							<Link component={RouterLink} to={siji.menuju} variant='subtitle1' 
+							color='textSecondary'>
 								{siji.item}
 							</Link>
 						</li>

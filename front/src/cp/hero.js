@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import {makeStyles} from '@material-ui/core/styles'
-import {Container, Grid, Typography, Link} from '@material-ui/core'
+import {Container, Grid, Typography, Button} from '@material-ui/core'
 import * as datas from '../data/datas'
 
 let useStyle=makeStyles(theme=>({
@@ -28,12 +28,12 @@ export default function PahlawanCP(props){
 		<div className={gaya.heroButtons}>
 			<Grid container spacing={2} justify='center'>
 				<Grid item>
-					<Link variant='button contained' color='primary' component={RouterLink}
- to='/cars'>Cek Mobil Sekarang</Link>
+					<Button variant='contained' color='primary' component={RouterLink}
+ to='/cars'>Cek Mobil Sekarang</Button>
 				</Grid>
 				<Grid item>
-					<Link variant='button outlined' color='primary' component={RouterLink}
- to='/about'>Jelajahi Dulu</Link>
+					<Button variant='outlined' color='primary' component={RouterLink}
+ to='/about'>Jelajahi Dulu</Button>
 				</Grid>
 			</Grid>
 		</div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Redirect} from 'react-router-dom'
 import {makeStyles} from '@material-ui/styles'
 import {Alert} from '@material-ui/lab'
@@ -9,30 +9,30 @@ let useStyle=makeStyles((theme)=>({
 	root: {
     width: '100%',
     '& > * + *': {
-      marginTop: theme.spacing(2),
+      marginTop: 2*8,
     	},
   	},
 }))
 
-export default class Error extends React.Component{
+export default function Error(){
+	let [tayang,setTayang]=useState(true)
+	let [dash]=useState(localStorage.getItem('sesi'))
 
-	state={tayang:true, dash:localStorage.getItem('sesi')}
-
-	ditutup=()=>{
-		this.setState({tayang:false})
+	let ditutup=()=>{
+		setTayang(false)
 	}
 
-	render(){
-		let {tayang,dash}=this.state
-		let classes=useStyle()
-		if (tayang)return <div className={classes.root}>
-				<Alert action={<IconButton aria-label='close' color='inherit' size='small'
-				onClick={this.ditutup}><Close fontSize='inherit'/></IconButton>}>404 Not Found</Alert>
-			</div>
-		else {
-			if(dash)return <Redirect to="/dash"/>
-			else return <Redirect to="/"/>
-		}
+	let classes=useStyle()
+	if (tayang)return <div className={classes.root}>
+			<Alert action={
+				<IconButton aria-label='close' color='inherit' size='small'
+			onClick={ditutup}>
+					<Close fontSize='inherit'/>
+				</IconButton>} color='error' severity='error'>404 Not Found
+			</Alert>
+		</div>
+	else {
+		if(dash)return <Redirect to="/dash"/>
+		else return <Redirect to="/"/>
 	}
-
 }
