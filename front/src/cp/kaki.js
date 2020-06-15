@@ -25,8 +25,7 @@ let useStyle=makeStyles((theme)=>({
 }))
 
 export default function Kaki(props){
-	let gaya=useStyle()
-		let {isi}=props
+	let gaya=useStyle(),{isi}=props
 		return <Container className={gaya.footer} component='footer' maxWidth='md'>
 			<Grid container spacing={4} justify='space-evenly'>
 			{isi.map((iki)=>{

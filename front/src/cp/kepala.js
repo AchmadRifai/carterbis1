@@ -26,8 +26,7 @@ let useStyle=makeStyles((theme)=>({
 }))
 
 export default function Kepala(props){
-	let classes=useStyle()
-	let {conf}=props
+	let classes=useStyle(),{conf}=props
 	return <AppBar elevation={0} className={classes.appBar}>
 		<Toolbar className={classes.toolbar}>
 			<IconButton className={classes.menuButton} aria-label='menu' edge='start' color='inherit'>

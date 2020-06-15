@@ -2,7 +2,7 @@ import {Container, Grid, CardMedia, Card, CardContent, Typography, CardActions, 
 } from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import React from 'react'
-import CurrencyFormat from 'react-currency-format'
+import Uang from '../uang'
 
 let useStyle=makeStyles(theme=>({
 	cardGrid: {
@@ -23,8 +23,7 @@ let useStyle=makeStyles(theme=>({
 }))
 
 export default function Kartu2(props) {
-	let gaya=useStyle()
-	let {mobil2}=props
+	let gaya=useStyle(),{mobil2}=props
 	return <Container className={gaya.cardGrid} maxWidth='md'>
 		<Grid container spacing={4}>
 		{mobil2.map(i=>{
@@ -33,7 +32,7 @@ export default function Kartu2(props) {
 					<CardMedia className={gaya.cardMedia} image={i.gbr}/>
 					<CardContent>
 						<Typography gutterBottom variant="h5" component="h2">{i.nm}</Typography>
-						<Typography>{i.hrg} per hari</Typography>
+						<Typography><Uang nilai={i.hrg}/> per hari</Typography>
 					</CardContent>
 					<CardActions>
 						<Button size="small" color="primary">Pesan</Button>
