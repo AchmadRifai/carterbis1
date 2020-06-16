@@ -4,6 +4,7 @@ let db = require('./db')
 let _ = require('lodash')
 let uploads = require('./uploads')
 let cors = require('cors')
+let dao = require('./dao')
 
 let PORT = process.env.PORT || 5000
 let app = express()
@@ -25,18 +26,9 @@ app.use(cors()).use(bodyParser.json()).use(express.urlencoded({ extended: true }
         })
     }).get('/',(_,res)=>{
 		let hasil={}
-		db.Galery.find((e,a)=>{
-			if(e)return res.status(500).json(e)
-			hasil.galeri=a
-			db.Mobil.find((e1,a1)=>{
-				if(e1)return res.status(500).json(e1)
-				hasil.mobil=a1
-				db.Employer.find((e2,a2)=>{
-					if(e2)return res.status(500).json(e2)
-					hasil.pegawai=a2
-				})
-			})
-		})
-	})
+		return dao.allMobil(res,hasil,()=>dao.allGalery(res,hasil,()=>dao.allKontak(res,hasil,()=>
+dao.allEmployer(res,hasil,()=>dao.allMitra(res,hasil,()=>dao.allKontak(res,hasil,()=>dao.allLogin(res,hasil,
+()=>res.json(hasil))))))))
+	}).get('/komen',(_,res)=>{})
 
 app.listen(PORT, () => console.log('Listening on ${PORT}'))

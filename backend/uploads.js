@@ -4,7 +4,7 @@ let crypto = require('crypto')
 let _=require('lodash')
 let GridFsStorage = require("multer-gridfs-storage")
 
-let host = 'mongodb+srv://ashura:paradewa@cluster0-1nxfr.mongodb.net/carter?retryWrites=true&w=majority'
+let host = 'mongodb://ashura:paradewa@cluster0-shard-00-00-1nxfr.mongodb.net:27017,cluster0-shard-00-01-1nxfr.mongodb.net:27017,cluster0-shard-00-02-1nxfr.mongodb.net:27017/<dbname>?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority'
 
 let storage_mobil = new GridFsStorage({
     url: host,
