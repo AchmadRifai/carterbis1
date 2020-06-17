@@ -1,21 +1,40 @@
 let express = require('express')
-let bodyParser = require('body-parser')
-let mongoClient=require('mongodb').MongoClient
-let _ = require('lodash')
-let cors = require('cors')
+let bodyParser=require('body-parser'),_=require('lodash'),cors=require('cors'),stream=require('stream')
+let dao=require('./dao')
 
-let host = 'mongodb://ashura:paradewa@cluster0-shard-00-00-1nxfr.mongodb.net:27017,cluster0-shard-00-01-1nxfr.mongodb.net:27017,cluster0-shard-00-02-1nxfr.mongodb.net:27017/carter?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority'
-let PORT = process.env.PORT || 5000
-let app = express()
-let client=new mongoClient(host)
+let PORT = process.env.PORT || 5000,app = express()
 
-app.use(cors()).use(bodyParser.json()).use(express.urlencoded({ extended: true }))
-
-client.connect((e)=>{
-	if(e){
-		console.log(e)
-		return
-	} let db=client.db('carter')
-	app.get('/',(_,res)=>{})
-	app.listen(PORT, () => console.log('Listening on ${PORT}'))
+dao.seq.sync().then(()=>{
+	console.log('tables created')
+	dao.Login.create({user:'admin',pass:'admin'}).success(l=>console.log(JSON.stringify(l)))
 })
+
+app.use(cors()).use(bodyParser.json()).use(express.urlencoded({ extended: true })).get('/',(_,res)=>{
+	let hasil={}
+	dao.Company.all().success(c=>{
+		hasil.company=c
+		dao.Galeri.findAll({attributes:['tipe','nama','id']}).success(g=>{
+			hasil.galery=g
+			dao.Mitra.findAll({attributes:['nm','id']}).success(m2=>{
+				hasil.mitra=m2
+				dao.Mobil.findAll({attributes:['merk','hrg','jum','id']}).success(m1=>{
+					hasil.mobil=m1
+					dao.Pegawai.findAll({attributes:['id','nama','almt','tlp']}).success(p=>{
+						hasil.pegawai=p
+						res.json(hasil)
+					}).catch(e=>res.status(500).json(e))
+				}).catch(e=>res.status(500).json(e))
+			}).catch(e=>res.status(500).json(e))
+		}).catch(e=>res.status(500).json(e))
+	}).catch(e=>res.status(500).json(e))
+}).get('/img/galery/:id',(req,res)=>{
+	dao.Galeri.findById(req.params.id).success(g=>{
+		let fc=Buffer.from(g.isi,'base64'),rs=new stream.PassThrough()
+		rs.end(fc)
+		res.set('Content-disposition','attachment; filename='+g.nama)
+		res.set('Content-Type',g.tipe)
+		rs.pipe(res)
+	}).catch(e=>res.status(500).json(e))
+})
+
+app.listen(PORT, () => console.log('Listening on ${PORT}'))
