@@ -1,7 +1,12 @@
 let Sequelize=require('sequelize'),multer=require('multer')
 
-let seq=new Sequelize(process.env.DATABASE_URL),storage=multer.memoryStorage()
-let upload=multer({storage:storage}),g1=(seq,Sequelize)=>{
+let seq
+if(process.env.DATABASE_URL)seq=new Sequelize(process.env.DATABASE_URL)
+else seq=new Sequelize('carter','root','',{
+	host:'localhost',
+	dialect:'mysql'
+})
+let storage=multer.memoryStorage(),upload=multer({storage:storage}),g1=(seq,Sequelize)=>{
 	return seq.define('galeri',{tipe:{type:Sequelize.STRING},nama:{type:Sequelize.STRING},
 isi:{type:Sequelize.BLOB('long')}})
 },m1=(seq,Sequelize)=>{
