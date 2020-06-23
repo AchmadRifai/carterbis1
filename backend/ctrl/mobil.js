@@ -21,7 +21,7 @@ let all=(_,res)=>{
 		}else res.status(500).json({msg:'gambar tidak ditemukan'})
 		let fc=Buffer.from(berkas,'base64'),rs=new stream.PassThrough()
 		rs.end(fc)
-		res.set('Content-disposition','attachment; filename='+v.merk)
+		res.set('Content-disposition','attachment; filename='+v.merk+'.'+berkas_type)
 		res.set('Content-Type',berkas_type)
 		rs.pipe(res)
 	}).catch(e=>res.status(500).json(e))
@@ -31,25 +31,25 @@ let all=(_,res)=>{
 		dao.Mobil.create(data).then(v=>res.json({data:v,msg:'sukses'})).catch(e=>res.status(500).json(e))
 	}else res.status(500).json({msg:'format data tidak valid'})
 },upload=(req,res)=>{
-	if(req.body.id&&req.body.posisi&&req.file.gbr){
-		let storedMimeType=fileType(req.file.gbr)
+	if(req.body.id&&req.body.posisi&&req.file.gbr)fileType.fromBuffer(req.file.buffer).then(storedMimeType=>{
 		dao.Mobil.findByPk(req.body.id).then(v=>{
 			if(req.params.posisi==='depan'){
-				v.depan=req.file.gbr
-				v.depan_type=storedMimeType.mime
+				v.depan=req.file.buffer
+				v.depan_type=storedMimeType.ext
 			}else if(req.params.posisi==='belakang'){
-				v.belakang=req.file.gbr
-				v.belakang_type=storedMimeType.mime
+				v.belakang=req.file.buffer
+				v.belakang_type=storedMimeType.ext
 			}else if(req.params.posisi==='kanan'){
-				v.kanan=req.file.gbr
-				v.kanan_type=storedMimeType.mime
+				v.kanan=req.file.buffer
+				v.kanan_type=storedMimeType.ext
 			}else if(req.params.posisi==='kiri'){
-				v.kiri=req.file.gbr
-				v.kiri_type=storedMimeType.mime
+				v.kiri=req.file.buffer
+				v.kiri_type=storedMimeType.ext
 			}else res.status(500).json({msg:'gambar tidak ditemukan'})
-			v.save().then(s=>res.json({msg:'sukses',id:s.id})).catch(e=>res.status(500).json(e))
+			v.save().then(g=>res.json({msg:'sukses',id:g.id})).catch(e=>res.status(500).json(e))
 		}).catch(e=>res.status(500).json(e))
-	}else res.status(500).json({msg:'format data tidak valid'})
+	}).catch(e=>res.status(500).json(e))
+	else res.status(500).json({msg:'format data tidak valid'})
 },del=(req,res)=>{
 	if(req.body.id){
 		dao.Mobil.findByPk(req.body.id).then(s=>{
