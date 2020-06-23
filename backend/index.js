@@ -32,10 +32,7 @@ app.use(cors()).use(bodyParser.json()).use(express.urlencoded({ extended: true }
 					hasil.mobil=m1
 					dao.Pegawai.findAll({attributes:['id','nm','almt','tlp']}).then(p=>{
 						hasil.pegawai=p
-						dao.Login.findAll().then(l=>{
-							hasil.login=l
-							res.json(hasil)
-						}).catch(e=>res.status(500).json(e))
+						res.json(hasil)
 					}).catch(e=>res.status(500).json(e))
 				}).catch(e=>res.status(500).json(e))
 			}).catch(e=>res.status(500).json(e))
