@@ -19,14 +19,11 @@ tlp:req.body.tlp,tipe:storedMimeType.mime}
 		dao.Pegawai.create(data).then(v=>res.json({msg:'sukses',data:v.id})).catch(e=>res.status(500).json(e))
 	} else res.status(500).json({msg:'form invalid'})
 },edit=(req,res)=>{
-	if(req.file.gbr&&req.body.nm&&req.body.almt&&req.body.tlp&&req.body.id){
+	if(req.body.nm&&req.body.almt&&req.body.tlp&&req.body.id){
 		dao.Pegawai.findById(req.body.id).then(v=>{
-			let storedMimeType=fileType(req.file.gbr)
-			v.gbr=req.file.gbr
 			v.nm=req.body.nm
 			v.almt=req.body.almt
 			v.tlp=req.body.tlp
-			v.tipe=storedMimeType.mime
 			v.save().then(g=>res.json({msg:'sukses',data:g.id})).catch(e=>res.status(500).json(e))
 		}).catch(e=>res.status(500).json(e))
 	} else res.status(500).json({msg:'form invalid'})
@@ -35,6 +32,14 @@ tlp:req.body.tlp,tipe:storedMimeType.mime}
 		v.destroy().then(d=>res.json({msg:'sukses',data:d.id})).catch(e=>res.status(500).json(e))
 	}).catch(e=>res.status(500).json(e))
 	else res.status(500).json({msg:'form invalid'})
+},gbr2=(req,res)=>{
+	if(req.body.id&&req.file.gbr)dao.Pegawai.findById(req.body.id).then(v=>{
+		let storedMimeType=fileType(req.file.gbr)
+		v.gbr=req.file.gbr
+		v.tipe=storedMimeType.mime
+		v.save().then(g=>res.json({msg:'sukses',data:g.id})).catch(e=>res.status(500).json(e))
+	}).catch(e=>res.status(500).json(e))
+	else res.status(500).json({msg:'form invalid'})
 }
 
-module.exports={all,img,add,edit,del}
+module.exports={all,img,add,edit,del,gbr2}

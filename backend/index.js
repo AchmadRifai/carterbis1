@@ -2,6 +2,7 @@ let express = require('express')
 let bodyParser=require('body-parser'),_=require('lodash'),cors=require('cors')
 let dao=require('./dao'),galeri=require('./ctrl/galeri'),mobil=require('./ctrl/mobil')
 let mitra=require('./ctrl/mitra'),login=require('./ctrl/login'),comp=require('./ctrl/company')
+let peg=require('./ctrl/pegawai')
 
 let PORT = process.env.PORT || 5000,app = express()
 
@@ -46,6 +47,9 @@ app.use(cors()).use(bodyParser.json()).use(express.urlencoded({ extended: true }
 .post('/mobil/add',mobil.add).post('/mobil/img',dao.upload.single('file'),mobil.upload)
 .post('/mobil/del',mobil.del).get('/mitras',mitra.all).post('/mitra/add',dao.upload.single('file'),mitra.add)
 .post('/mitra/del',mitra.del).post('/logins',login.one).get('/sesi',login.get).post('/repass',login.passwd)
-.get('/logout',login.metu).get('/comp',comp.get).post('/comp/change',comp.ubah)
+.get('/logout',login.metu).get('/comp',comp.get).post('/comp/change',comp.ubah).get('/pegawai',peg.all)
+.get('/pegawai/img/:id',peg.img).post('/pegawai/add',dao.upload.single('file'),peg.add)
+.post('/pegawai/edit',peg.edit).post('/pegawai/reupload',dao.upload.single('file'),peg.gbr2)
+.post('/pegawai/del',peg.del)
 
 app.listen(PORT, () => console.log('Listening on '+PORT))
