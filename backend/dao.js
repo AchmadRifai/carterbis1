@@ -18,7 +18,8 @@ belakang_type:{type:Sequelize.STRING},kiri_type:{type:Sequelize.STRING},kanan_ty
 	return seq.define('mitra',{gbr:{type:Sequelize.BLOB('long')},nm:{type:Sequelize.STRING},
 tipe:{type:Sequelize.STRING}})
 },login=(seq,Sequelize)=>{
-	return seq.define('login',{user:{type:Sequelize.STRING},pass:{type:Sequelize.STRING}})
+	return seq.define('login',{user:{type:Sequelize.STRING},pass:{type:Sequelize.STRING},
+loge:{type:Sequelize.DATE}})
 },perusahaan=(seq,Sequelize)=>{
 	return seq.define('company',{nm:{type:Sequelize.STRING},tlp:{type:Sequelize.STRING},
 email:{type:Sequelize.STRING},wa:{type:Sequelize.STRING},moto:{type:Sequelize.TEXT}})
