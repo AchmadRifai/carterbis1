@@ -10,7 +10,7 @@ let add=(req,res)=>{
 		}).catch(e=>res.status(500).json(e))
 	}else res.status(500).json({msg:'tolong berikan nama dan berkas gambar'})
 },get=(_,res)=>{
-	dao.Galeri.findById(req.params.id).then(g=>{
+	dao.Galeri.findByPk(req.params.id).then(g=>{
 		let fc=Buffer.from(g.isi,'base64'),rs=new stream.PassThrough()
 		rs.end(fc)
 		res.set('Content-disposition','attachment; filename='+g.nama)
@@ -19,7 +19,7 @@ let add=(req,res)=>{
 	}).catch(e=>res.status(500).json(e))
 },del=(req,res)=>{
 	if(req.body.id){
-		dao.Galeri.findById(req.body.id).then(g=>{
+		dao.Galeri.findByPk(req.body.id).then(g=>{
 			g.destroy().then(()=>{
 				res.json({msg:'deleted',item:g.id})
 			}).catch(e=>res.status(500).json(e))

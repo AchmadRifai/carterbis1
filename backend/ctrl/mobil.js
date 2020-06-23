@@ -4,7 +4,7 @@ let all=(_,res)=>{
 	dao.Mobil.findAll({attributes:['merk','hrg','jum','id','createdAt','updatedAt']}).then(a=>res.json(a))
 .catch(e=>res.status(500).json(e))
 },get=(req,res)=>{
-	dao.Mobil.findById(req.params.id).then(v=>{
+	dao.Mobil.findByPk(req.params.id).then(v=>{
 		let berkas,berkas_type
 		if(req.params.posisi==='depan'){
 			berkas=v.depan
@@ -33,7 +33,7 @@ let all=(_,res)=>{
 },upload=(req,res)=>{
 	if(req.body.id&&req.body.posisi&&req.file.gbr){
 		let storedMimeType=fileType(req.file.gbr)
-		dao.Mobil.findById(req.body.id).then(v=>{
+		dao.Mobil.findByPk(req.body.id).then(v=>{
 			if(req.params.posisi==='depan'){
 				v.depan=req.file.gbr
 				v.depan_type=storedMimeType.mime
@@ -52,7 +52,7 @@ let all=(_,res)=>{
 	}else res.status(500).json({msg:'format data tidak valid'})
 },del=(req,res)=>{
 	if(req.body.id){
-		dao.Mobil.findById(req.body.id).then(s=>{
+		dao.Mobil.findByPk(req.body.id).then(s=>{
 			s.destroy().then(_=>res.json({msg:'sukses',id:req.body.id}))
 .catch(e=>res.status(500).json(e))
 		}).catch(e=>res.status(500).json(e))
