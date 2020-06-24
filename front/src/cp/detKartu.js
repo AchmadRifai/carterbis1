@@ -3,6 +3,7 @@ import {CardActions, Button, Dialog, DialogTitle, DialogActions, DialogContent,
 DialogContentText} from '@material-ui/core'
 import ImageGallery from 'react-image-gallery'
 import DelBtn from './delBtn'
+import EditMobil from './editMobil'
 
 export default function DetMobilDial(props) {
 	let{item,admin}=props,[open,setOpen]=useState(false),descriptionElementRef=useRef(null)
@@ -34,6 +35,7 @@ thumbnail:'https://arcane-ridge-61456.herokuapp.com/img/mobil/kiri/'+item.id}]
 				<ImageGallery items={galery} showFullscreenButton={false} showPlayButton={false}/>
 			</DialogContentText></DialogContent>
 			{admin?<DialogActions>
+				<EditMobil item={item}/>
 				<DelBtn nomor={item.id} merk={item.merk}/>
 			</DialogActions>:''}
 		</Dialog>

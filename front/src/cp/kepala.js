@@ -39,7 +39,7 @@ export default function Kepala(props){
 				<MenuIcon/>
 			</IconButton>
 			<Typography noWrap variant='h6' color='inherit' className={classes.toolbarTitle}>
-				{muat?<CircularProgress/>:nm}
+				{muat?<CircularProgress color='inherit'/>:nm}
 			</Typography>
 			<nav>
 			{conf.menune.map(i1=>{
