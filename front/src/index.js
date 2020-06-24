@@ -6,11 +6,15 @@ import App from './App'
 import Error from './Error'
 import * as serviceWorker from './serviceWorker'
 import {BrowserRouter, Switch, Route} from 'react-router-dom/cjs/react-router-dom.min'
+import Login from './login'
+import Dash from './dash'
 
 ReactDOM.render(
 	<BrowserRouter>
 		<Switch>
 			<Route path="/" exact><App/></Route>
+			<Route path="/login" exact><Login/></Route>
+			<Route path="/dash" exact><Dash/></Route>
 			<Route><Error/></Route>
 		</Switch>
   	</BrowserRouter>,

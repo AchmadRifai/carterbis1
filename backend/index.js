@@ -6,7 +6,7 @@ let peg=require('./ctrl/pegawai')
 
 let PORT = process.env.PORT || 5000,app = express()
 
-dao.seq.drop().then(()=>{
+//dao.seq.drop().then(()=>{
 	dao.seq.sync().then(()=>{
 		console.log('tables created')
 		dao.Company.findAll().then(l=>{
@@ -18,7 +18,7 @@ dao.seq.drop().then(()=>{
 				console.log(JSON.stringify(l2)))
 		})
 	})
-})
+//})
 
 app.use(cors()).use(bodyParser.json()).use(express.urlencoded({ extended: true })).get('/',(_,res)=>{
 	let hasil={}

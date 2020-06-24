@@ -1,8 +1,7 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import {makeStyles} from '@material-ui/core/styles'
-import {Container, Grid, Typography, Button} from '@material-ui/core'
-import * as datas from '../data/datas'
+import {Container, Grid, Typography, Button, CircularProgress} from '@material-ui/core'
 
 let useStyle=makeStyles(theme=>({
 	heroContent: {
@@ -14,19 +13,26 @@ let useStyle=makeStyles(theme=>({
   	},
 }))
 
-export default function PahlawanCP(props){
-	let gaya=useStyle()
+export default function PahlawanCP(){
+	let gaya=useStyle(),[tayang,setTayang]=useState(true),[nm,setNm]=useState(''),[moto,setMoto]=useState('')
+	fetch('https://arcane-ridge-61456.herokuapp.com/comp').then(r=>{
+		if(r.status===200)return r.json()
+	}).then(d=>{
+		setNm(d.nm)
+		setMoto(d.moto)
+		setTayang(false)
+	})
 	return <div className={gaya.heroContent}>
-		<Container maxWidth='sm'>
+		{tayang?<CircularProgress/>:<Container maxWidth='sm'>
 			<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              {datas.cpKepala.kepala.compName}
+              {nm}
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Kami menyediakan penyewaan Berbagai jenis mobil
+              {moto}
             </Typography>
-		</Container>
+		</Container>}
 		<div className={gaya.heroButtons}>
-			<Grid container spacing={2} justify='center'>
+			{tayang?<div></div>:<Grid container spacing={2} justify='center'>
 				<Grid item>
 					<Button variant='contained' color='primary' component={RouterLink}
  to='/cars'>Cek Mobil Sekarang</Button>
@@ -35,7 +41,7 @@ export default function PahlawanCP(props){
 					<Button variant='outlined' color='primary' component={RouterLink}
  to='/about'>Jelajahi Dulu</Button>
 				</Grid>
-			</Grid>
+			</Grid>}
 		</div>
 	</div>
 }

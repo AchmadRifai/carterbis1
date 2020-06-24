@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import {makeStyles} from '@material-ui/core/styles'
-import {AppBar, Toolbar, Typography, Link, IconButton} from '@material-ui/core'
+import {AppBar, Toolbar, Typography, Link, IconButton,CircularProgress} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 
 let useStyle=makeStyles((theme)=>({
@@ -26,14 +26,20 @@ let useStyle=makeStyles((theme)=>({
 }))
 
 export default function Kepala(props){
-	let classes=useStyle(),{conf}=props
+	let classes=useStyle(),{conf}=props,[nm,setNm]=useState(''),[muat,setMuat]=useState(true)
+	fetch('https://arcane-ridge-61456.herokuapp.com/comp').then(r=>{
+		if(r.status===200)return r.json()
+	}).then(d=>{
+		setNm(d.nm)
+		setMuat(false)
+	})
 	return <AppBar elevation={0} className={classes.appBar}>
 		<Toolbar className={classes.toolbar}>
 			<IconButton className={classes.menuButton} aria-label='menu' edge='start' color='inherit'>
 				<MenuIcon/>
 			</IconButton>
 			<Typography noWrap variant='h6' color='inherit' className={classes.toolbarTitle}>
-				{conf.compName}
+				{muat?<CircularProgress/>:nm}
 			</Typography>
 			<nav>
 			{conf.menune.map(i1=>{

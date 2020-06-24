@@ -2,8 +2,10 @@ let dao=require('../dao'),_=require('lodash')
 
 let one=(req,res)=>{
 	dao.Login.findByPk(1).then(v=>{
-		v.loge=req.body.tgl
-		v.save().then(g=>res.json({data:g,msg:'sukses'})).catch(e=>res.status(500).json(e))
+		if(v.user===req.body.user&&v.pass===req.body.pass){
+			v.loge=req.body.tgl
+			v.save().then(g=>res.json({data:g,msg:'sukses'})).catch(e=>res.status(500).json(e))
+		}else res.json({msg:'ditolak'})
 	}).catch(e=>res.status(500).json(e))
 },passwd=(req,res)=>{
 	if(req.body.newpass){
