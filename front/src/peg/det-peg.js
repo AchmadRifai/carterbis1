@@ -1,5 +1,7 @@
 import React from 'react'
-import {CardActions, Button, Dialog, DialogContent, DialogContentText, DialogActions} from '@material-ui/core'
+import {CardActions, Button, Dialog, DialogContent, DialogContentText, DialogActions
+,DialogTitle} from '@material-ui/core'
+import DelPeg from './del-peg'
 
 export default function DetPeg(props) {
 	let{item,admin}=props,wa='https://wa.me/'+item.tlp,[m,setM]=React.useState(false)
@@ -17,12 +19,13 @@ export default function DetPeg(props) {
 aria-describedby={kontenId}>
 			<DialogTitle id={titleId}>{item.nm}</DialogTitle>
 			<DialogContent dividers>
-				<DialogContentText id={kontentId} ref={der}>
+				<DialogContentText id={kontenId} ref={der}>
 					<div>{item.almt}</div>
 					<div>{item.tlp}</div>
 				</DialogContentText>
 			</DialogContent>
 			{admin?<DialogActions>
+				<DelPeg/>
 			</DialogActions>:''}
 		</Dialog>
 	</CardActions>
