@@ -29,7 +29,8 @@ thumbnail:'https://arcane-ridge-61456.herokuapp.com/img/mobil/kiri/'+item.id}]
 		{admin?'':
 <Button size="small" color="primary" target='_blank' href='https://wa.me/08708347842'>Pesan</Button>}
 		<Button size="small" color="primary" onClick={()=>setOpen(true)}>Lihat</Button>
-		<Dialog open={open} scroll='paper' onClose={()=>setOpen(false)} aria-labelledby={titleId}>
+		<Dialog open={open} scroll='paper' onClose={()=>setOpen(false)} aria-labelledby={titleId} 
+aria-describedby={kontenId}>
 			<DialogTitle id={titleId}>{item.merk}</DialogTitle>
 			<DialogContent dividers><DialogContentText id={kontenId} ref={descriptionElementRef}>
 				<ImageGallery items={galery} showFullscreenButton={false} showPlayButton={false}/>
