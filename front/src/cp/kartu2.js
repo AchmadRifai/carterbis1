@@ -33,6 +33,7 @@ export default function Kartu2(props) {
 	setLoad(false)
 })
 	return <Container className={gaya.cardGrid} maxWidth='md'>
+<Typography gutterBottom variant='h4' align='center'>Mobil Kami</Typography>
 		{load?<CircularProgress/>:<Grid container spacing={4}>
 		{mobil2.map(i=>{
 			let img='https://arcane-ridge-61456.herokuapp.com/img/mobil/depan/'+i.id

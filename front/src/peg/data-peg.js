@@ -31,6 +31,7 @@ export default function DataPeg(prop) {
 	setM(false)
 })
 	return<Container className={gaya.cardGrid} maxWidth='md'>
+	<Typography gutterBottom variant='h4' align='center'>Pegawai Kami</Typography>
 	{m?<CircularProgress/>:<Grid container spacing={4}>
 	{peg.map(i=>{
 		let img='https://arcane-ridge-61456.herokuapp.com/pegawai/img/'+i.id

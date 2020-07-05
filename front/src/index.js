@@ -8,6 +8,9 @@ import * as serviceWorker from './serviceWorker'
 import {BrowserRouter, Switch, Route} from 'react-router-dom/cjs/react-router-dom.min'
 import Login from './login'
 import Dash from './dash'
+import Cars from './pages/cars'
+import SupportBy from './pages/support'
+import Pegawais from './pages/pegawai'
 
 ReactDOM.render(
 	<BrowserRouter>
@@ -15,6 +18,9 @@ ReactDOM.render(
 			<Route path="/" exact><App/></Route>
 			<Route path="/login" exact><Login/></Route>
 			<Route path="/dash" exact><Dash/></Route>
+			<Route path="/cars" exact><Cars/></Route>
+			<Route path="/support-by" exact><SupportBy/></Route>
+			<Route path="/employers" exact><Pegawais/></Route>
 			<Route><Error/></Route>
 		</Switch>
   	</BrowserRouter>,

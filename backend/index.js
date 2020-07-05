@@ -2,7 +2,7 @@ let express = require('express')
 let bodyParser=require('body-parser'),_=require('lodash'),cors=require('cors')
 let dao=require('./dao'),galeri=require('./ctrl/galeri'),mobil=require('./ctrl/mobil')
 let mitra=require('./ctrl/mitra'),login=require('./ctrl/login'),comp=require('./ctrl/company')
-let peg=require('./ctrl/pegawai')
+let peg=require('./ctrl/pegawai'),komen=require('./ctrl/komen')
 
 let PORT = process.env.PORT || 5000,app = express()
 
@@ -47,6 +47,7 @@ app.use(cors()).use(bodyParser.json()).use(express.urlencoded({ extended: true }
 .get('/logout',login.metu).get('/comp',comp.get).post('/comp/change',comp.ubah).get('/pegawai',peg.all)
 .get('/pegawai/img/:id',peg.img).post('/pegawai/add',dao.upload.single('file'),peg.add)
 .post('/pegawai/edit',peg.edit).post('/pegawai/reupload',dao.upload.single('file'),peg.gbr2)
-.post('/pegawai/del',peg.del)
+.post('/pegawai/del',peg.del).get('/komens',komen.all).post('/komen/add',komen.add)
+.post('/komen/del',komen.del)
 
 app.listen(PORT, () => console.log('Listening on '+PORT))

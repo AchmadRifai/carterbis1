@@ -6,8 +6,7 @@ let kaki= [
 		{item:'Tentang',menuju:'/about'}
 	]},
 	{judul:'Sumber Daya',desk:[
-		{item:'Mobil',menuju:'/cars'},
-		{item:'Fitur',menuju:'/features'}
+		{item:'Mobil',menuju:'/cars'}
 	]},
 	{judul:'Kontak',desk:[
 		{item:'Situs',menuju:'/'},

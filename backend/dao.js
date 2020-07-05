@@ -26,7 +26,11 @@ email:{type:Sequelize.STRING},wa:{type:Sequelize.STRING},moto:{type:Sequelize.TE
 },peg=(seq,Sequelize)=>{
 	return seq.define('pegawai',{nm:{type:Sequelize.STRING},gbr:{type:Sequelize.BLOB('long')},
 almt:{type:Sequelize.STRING},tlp:{type:Sequelize.STRING},tipe:{type:Sequelize.STRING}})
+},k=(seq,Sequelize)=>{
+	return seq.define('komen',{mail:{type:Sequelize.STRING},nm:{type:Sequelize.STRING},
+msg:{type:Sequelize.STRING}})
 }
 
 module.exports={seq,Galeri:g1(seq,Sequelize),upload,Mobil:m1(seq,Sequelize),Mitra:m2(seq,Sequelize),
-Login:login(seq,Sequelize),Sequelize,Company:perusahaan(seq,Sequelize),Pegawai:peg(seq,Sequelize)}
+Login:login(seq,Sequelize),Sequelize,Company:perusahaan(seq,Sequelize),Pegawai:peg(seq,Sequelize),
+Komen:k(seq,Sequelize)}
