@@ -11,6 +11,7 @@ import Dash from './dash'
 import Cars from './pages/cars'
 import SupportBy from './pages/support'
 import Pegawais from './pages/pegawai'
+import Abouts from './pages/about'
 
 ReactDOM.render(
 	<BrowserRouter>
@@ -21,6 +22,7 @@ ReactDOM.render(
 			<Route path="/cars" exact><Cars/></Route>
 			<Route path="/support-by" exact><SupportBy/></Route>
 			<Route path="/employers" exact><Pegawais/></Route>
+			<Route path="/about" exact><Abouts/></Route>
 			<Route><Error/></Route>
 		</Switch>
   	</BrowserRouter>,
